@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/topicsFragment">
+
+    <include app:graph="@navigation/login" />
+
+    <action
+        android:id="@+id/action_global_login"
+        app:destination="@id/nav_graph_login"/>
+
+    <fragment
+        android:id="@+id/topicsFragment"
+        android:name="com.giaquino.android.cropped.ui.topics.TopicsFragment"
+        android:label="@string/app_name">
+        <action
+            android:id="@+id/action_topicsFragment_to_photosFragment"
+            app:destination="@id/photosFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photosFragment"
+        android:name="com.giaquino.android.cropped.ui.photos.PhotosFragment"
+        android:label="{title}">
+        <action
+            android:id="@+id/action_photosFragment_to_photoDetailsFragment"
+            app:destination="@id/photoDetailsFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photoDetailsFragment"
+        android:name="com.giaquino.android.cropped.ui.photodetails.PhotoDetailsFragment"
+        android:label="PhotoDetailsFragment">
+    </fragment>
+
+</navigation>
