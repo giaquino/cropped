@@ -19,12 +19,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.giaquino.android.cropped.R;
 import com.giaquino.android.cropped.common.Constant;
+import com.giaquino.android.cropped.data.repository.SharedRepository;
+import com.giaquino.android.cropped.data.repository.UserRepository;
 import com.giaquino.android.cropped.databinding.LoginOauthFragmentBinding;
 import com.giaquino.android.cropped.data.model.AccessToken;
 import com.giaquino.android.cropped.ui.base.BaseFragment;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import timber.log.Timber;
 
+@AndroidEntryPoint
 public class LoginOAuthFragment extends BaseFragment {
 
     private LoginOauthFragmentBinding binding;
@@ -46,11 +52,7 @@ public class LoginOAuthFragment extends BaseFragment {
     }
 
     private void initializeViewModel() {
-        vm = new ViewModelProvider(requireNavController().getViewModelStoreOwner(R.id.nav_graph_login),
-                new LoginViewModel.Factory(
-                        getAppContainer().userRepository,
-                        getAppContainer().sharedRepository)).get(LoginViewModel.class);
-
+        vm = getViewModel(LoginViewModel.class, R.id.nav_graph_login);
         vm.accessToken().observe(getViewLifecycleOwner(), resource -> {
             resource.isLoading(it -> handleLoading(true, true));
             resource.isFailure(this::handleFailure);

@@ -1,11 +1,12 @@
 package com.giaquino.android.cropped.ui.login;
 
-import androidx.annotation.NonNull;
+import androidx.hilt.Assisted;
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.giaquino.android.cropped.common.Constant;
 import com.giaquino.android.cropped.data.api.request.AccessTokenRequest;
@@ -21,6 +22,7 @@ public class LoginViewModel extends ViewModel {
     private MediatorLiveData<Resource<AccessToken>> accessToken = new MediatorLiveData<>();
 
 
+    @ViewModelInject
     public LoginViewModel(UserRepository userRepository, SharedRepository sharedRepository) {
         this.userRepository = userRepository;
         this.sharedRepository = sharedRepository;
@@ -50,23 +52,5 @@ public class LoginViewModel extends ViewModel {
             accessToken.setValue(resource);
             accessToken.removeSource(liveData);
         });
-    }
-
-    public static class Factory implements ViewModelProvider.Factory {
-
-        private UserRepository userRepository;
-        private SharedRepository sharedRepository;
-
-        public Factory(UserRepository userRepository, SharedRepository sharedRepository) {
-            this.userRepository = userRepository;
-            this.sharedRepository = sharedRepository;
-        }
-
-        @SuppressWarnings("unchecked")
-        @NonNull
-        @Override
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new LoginViewModel(userRepository, sharedRepository);
-        }
     }
 }

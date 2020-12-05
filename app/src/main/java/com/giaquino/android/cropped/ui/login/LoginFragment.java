@@ -12,11 +12,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.giaquino.android.cropped.R;
 import com.giaquino.android.cropped.common.Constant;
+import com.giaquino.android.cropped.data.repository.SharedRepository;
+import com.giaquino.android.cropped.data.repository.UserRepository;
 import com.giaquino.android.cropped.databinding.LoginFragmentBinding;
 import com.giaquino.android.cropped.ui.base.BaseFragment;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import timber.log.Timber;
 
+@AndroidEntryPoint
 public class LoginFragment extends BaseFragment {
 
     private LoginFragmentBinding binding;
@@ -38,10 +42,7 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void initializeViewModel() {
-        vm = new ViewModelProvider(requireNavController().getViewModelStoreOwner(R.id.nav_graph_login),
-                new LoginViewModel.Factory(
-                        getAppContainer().userRepository,
-                        getAppContainer().sharedRepository)).get(LoginViewModel.class);
+        vm = getViewModel(LoginViewModel.class, R.id.nav_graph_login);
     }
 
     private void initialize() {

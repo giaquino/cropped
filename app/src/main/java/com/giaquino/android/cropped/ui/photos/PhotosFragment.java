@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 import com.giaquino.android.cropped.databinding.PhotosFragmentBinding;
 import com.giaquino.android.cropped.ui.base.BaseAuthFragment;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class PhotosFragment extends BaseAuthFragment {
 
     private PhotosFragmentBinding binding;

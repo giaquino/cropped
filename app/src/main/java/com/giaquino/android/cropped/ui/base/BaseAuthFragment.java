@@ -5,17 +5,19 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
 
 import com.giaquino.android.cropped.NavGraphMainDirections;
-import com.giaquino.android.cropped.R;
 import com.giaquino.android.cropped.common.Constant;
+import com.giaquino.android.cropped.data.repository.SharedRepository;
+
+import javax.inject.Inject;
 
 import timber.log.Timber;
 
 public abstract class BaseAuthFragment extends BaseFragment {
+
+    @Inject
+    SharedRepository sharedRepository;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public abstract class BaseAuthFragment extends BaseFragment {
             return;
         }
 
-        if (getAppContainer().sharedRepository.isLoggedIn()) {
+        if (sharedRepository.isLoggedIn()) {
             onLoginCompleted();
         } else {
             startLogin();

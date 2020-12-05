@@ -1,5 +1,6 @@
 package com.giaquino.android.cropped.ui.topics;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
@@ -17,6 +18,7 @@ public class TopicsViewModel extends ViewModel {
 
     private MediatorLiveData<Resource<List<Topic>>> topics = new MediatorLiveData<>();
 
+    @ViewModelInject
     public TopicsViewModel(TopicRepository topicRepository) {
         this.topicRepository = topicRepository;
     }

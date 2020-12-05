@@ -12,12 +12,18 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.giaquino.android.cropped.data.repository.TopicRepository;
 import com.giaquino.android.cropped.databinding.TopicsFragmentBinding;
 import com.giaquino.android.cropped.data.model.Topic;
 import com.giaquino.android.cropped.ui.base.BaseAuthFragment;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class TopicsFragment extends BaseAuthFragment {
 
     private TopicsFragmentBinding binding;
@@ -41,7 +47,7 @@ public class TopicsFragment extends BaseAuthFragment {
     }
 
     private void initializeViewModel() {
-        vm = new TopicsViewModel(getAppContainer().topicRepository);
+        vm = getViewModel(TopicsViewModel.class);
         vm.topics().observe(getViewLifecycleOwner(), resource -> {
             resource.isLoading(it -> handleLoading(it, true));
             resource.isSuccess(TopicsFragment.this::handleSuccess);

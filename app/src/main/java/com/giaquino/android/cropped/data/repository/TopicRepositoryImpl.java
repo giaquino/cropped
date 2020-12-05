@@ -7,6 +7,8 @@ import com.giaquino.android.cropped.data.model.Topic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.rxjava3.core.Single;
 
 public class TopicRepositoryImpl implements TopicRepository {
@@ -15,6 +17,7 @@ public class TopicRepositoryImpl implements TopicRepository {
 
     private List<Topic> topics = new ArrayList<>();
 
+    @Inject
     public TopicRepositoryImpl(UnsplashApi api) {
         this.api = api;
     }
