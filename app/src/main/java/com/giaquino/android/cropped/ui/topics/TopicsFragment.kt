@@ -48,15 +48,13 @@ class TopicsFragment : BaseAuthFragment() {
     private fun initialize() {
         handleLoading(loading = false)
         adapter = TopicsAdapter { topic: Topic -> requireNavController().navigate(actionTopicsFragmentToPhotosFragment(topic.title)) }
-        binding.list.apply {
-            adapter = adapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(object : ItemDecoration() {
-                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                    outRect.bottom += binding.list.paddingTop
-                }
-            })
-        }
+        binding.list.adapter = adapter
+        binding.list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.list.addItemDecoration(object : ItemDecoration() {
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                outRect.bottom += binding.list.paddingTop
+            }
+        })
         vm.getTopics()
     }
 

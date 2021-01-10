@@ -12,6 +12,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import com.giaquino.android.cropped.R
@@ -28,7 +29,7 @@ class LoginOAuthFragment : BaseFragment() {
 
     private lateinit var binding: LoginOauthFragmentBinding
 
-    private val vm: LoginViewModel by navGraphViewModels(R.navigation.login)
+    private val vm: LoginViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = LoginOauthFragmentBinding.inflate(inflater, container, false)
@@ -62,12 +63,12 @@ class LoginOAuthFragment : BaseFragment() {
         }
 
         binding.web.webViewClient = object : WebViewClient() {
-            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 handleLoading(loading = true, showLabel = false)
             }
 
-            override fun onPageFinished(view: WebView, url: String) {
+            override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 handleLoading(loading = false, showLabel = false)
             }

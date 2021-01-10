@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.navGraphViewModels
-import com.giaquino.android.cropped.R
+import androidx.fragment.app.viewModels
 import com.giaquino.android.cropped.common.Constant
 import com.giaquino.android.cropped.databinding.LoginFragmentBinding
 import com.giaquino.android.cropped.ui.base.BaseFragment
@@ -19,7 +18,7 @@ class LoginFragment : BaseFragment() {
 
     private lateinit var binding: LoginFragmentBinding
 
-    private val vm : LoginViewModel by navGraphViewModels(R.navigation.login)
+    private val vm : LoginViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = LoginFragmentBinding.inflate(inflater, container, false)
@@ -32,10 +31,12 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun initialize() {
-        binding.login.setOnClickListener { login() }
-        Timber.d("is logged in %s", vm.isLoggedIn)
-        previousSavedStateHandle.set(Constant.LOGIN_COMPLETED, vm.isLoggedIn)
-        if (vm.isLoggedIn) {
+        binding.login.setOnClickListener {
+            login()
+        }
+        Timber.d("is logged in %s", vm.isLoggedIn())
+        previousSavedStateHandle.set(Constant.LOGIN_CANCELLED, !vm.isLoggedIn())
+        if (vm.isLoggedIn()) {
             Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
             requireNavController().popBackStack()
         }

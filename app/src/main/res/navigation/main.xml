@@ -4,11 +4,6 @@
     android:id="@+id/nav_graph_main"
     app:startDestination="@id/topicsFragment">
 
-    <include app:graph="@navigation/login" />
-
-    <action
-        android:id="@+id/action_global_login"
-        app:destination="@id/nav_graph_login"/>
 
     <fragment
         android:id="@+id/topicsFragment"
@@ -36,5 +31,9 @@
         android:name="com.giaquino.android.cropped.ui.photodetails.PhotoDetailsFragment"
         android:label="PhotoDetailsFragment">
     </fragment>
+    <include app:graph="@navigation/login" />
+    <action
+        android:id="@+id/action_global_nav_graph_login"
+        app:destination="@id/nav_graph_login" />
 
 </navigation>

@@ -18,8 +18,9 @@ class LoginViewModel @ViewModelInject constructor(
     private val _token = MediatorLiveData<Resource<Token>>()
     val token: LiveData<Resource<Token>> = _token
 
-
-    val isLoggedIn: Boolean = sharedRepository.isLoggedIn
+    fun isLoggedIn() : Boolean {
+        return sharedRepository.isLoggedIn
+    }
 
     fun authorize(code: String) {
         val source: LiveData<Resource<Token>> = LiveDataReactiveStreams

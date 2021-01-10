@@ -16,5 +16,5 @@ object Constant {
         const val UNSPLASH_CLIENT_SECRET = ""
         const val UNSPLASH_OAUTH_URL = ""
         const val UNSPLASH_REDIRECT_URI = "cropped://oauth_callback"
-        const val LOGIN_COMPLETED = "LOGIN_COMPLETED"
+        const val LOGIN_CANCELLED = "LOGIN_CANCELLED"
 }
