@@ -12,7 +12,6 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import com.giaquino.android.cropped.R
@@ -29,7 +28,7 @@ class LoginOAuthFragment : BaseFragment() {
 
     private lateinit var binding: LoginOauthFragmentBinding
 
-    private val vm: LoginViewModel by viewModels()
+    private val vm: LoginViewModel by navGraphViewModels(R.id.nav_graph_login) { defaultViewModelProviderFactory }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = LoginOauthFragmentBinding.inflate(inflater, container, false)

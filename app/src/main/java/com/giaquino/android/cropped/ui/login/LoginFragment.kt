@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.navigation.navGraphViewModels
+import com.giaquino.android.cropped.R
 import com.giaquino.android.cropped.common.Constant
 import com.giaquino.android.cropped.databinding.LoginFragmentBinding
 import com.giaquino.android.cropped.ui.base.BaseFragment
@@ -18,7 +19,7 @@ class LoginFragment : BaseFragment() {
 
     private lateinit var binding: LoginFragmentBinding
 
-    private val vm : LoginViewModel by viewModels()
+    private val vm : LoginViewModel by navGraphViewModels(R.id.nav_graph_login) { defaultViewModelProviderFactory }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = LoginFragmentBinding.inflate(inflater, container, false)
