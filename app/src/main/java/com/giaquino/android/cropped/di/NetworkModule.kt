@@ -43,7 +43,7 @@ object NetworkModule {
         }
         val interceptor = Interceptor {
             if (sharedRepository.isLoggedIn) {
-                it.proceed(it.request().newBuilder().addHeader("Authorization", "Bearer " + sharedRepository.accessToken).build())
+                it.proceed(it.request().newBuilder().addHeader("Authorization", "Bearer " + sharedRepository.token).build())
             } else {
                 it.proceed(it.request())
             }
