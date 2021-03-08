@@ -17,4 +17,7 @@ class PhotoDetailsFragment : BaseAuthFragment() {
         binding = PhotoDetailsFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun initialize() {
+    }
 }

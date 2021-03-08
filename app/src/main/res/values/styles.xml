@@ -3,13 +3,18 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="colorOnPrimary">@color/text_on_primary</item>
     </style>
 
-    <style name="TextAppearance.Headline6" parent="TextAppearance.MaterialComponents.Headline6"/>
+    <style name="MyButton" parent="Widget.MaterialComponents.Button"/>
+    <style name="MyButton.TextButton" parent="Widget.MaterialComponents.Button.TextButton"/>
+    <style name="MyButton.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton"/>
+    <style name="MyButton.UnelevatedButton" parent="Widget.MaterialComponents.Button.UnelevatedButton"/>
+    <style name="MyButton.TextButton.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog"/>
+    <style name="MyButton.TextButton.Dialog.Flush" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush"/>
 
-    <style name="TextAppearance.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:textColor">#89000000</item>
-    </style>
+    <style name="MyTextAppearance.Headline6" parent="TextAppearance.MaterialComponents.Headline6"/>
+    <style name="MyTextAppearance.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1"/>
+    <style name="MyTextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1"/>
 
-    <style name="TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1"/>
 </resources>

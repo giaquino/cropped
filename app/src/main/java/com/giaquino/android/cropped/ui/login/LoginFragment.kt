@@ -26,17 +26,12 @@ class LoginFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialize()
-    }
-
-    private fun initialize() {
+    override fun initialize() {
         binding.login.setOnClickListener {
             login()
         }
         Timber.d("is logged in %s", vm.isLoggedIn())
-        previousSavedStateHandle.set(Constant.LOGIN_CANCELLED, !vm.isLoggedIn())
+        getPreviousSavedStateHandle().set(Constant.LOGIN_CANCELLED, !vm.isLoggedIn())
         if (vm.isLoggedIn()) {
             Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
             requireNavController().popBackStack()

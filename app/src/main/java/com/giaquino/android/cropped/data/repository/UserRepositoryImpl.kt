@@ -5,6 +5,7 @@ import com.giaquino.android.cropped.data.api.request.TokenRequest
 import com.giaquino.android.cropped.data.common.Resource
 import com.giaquino.android.cropped.data.model.Token
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(private val api: UnsplashAuthApi,
@@ -16,8 +17,7 @@ class UserRepositoryImpl @Inject constructor(private val api: UnsplashAuthApi,
                 .onErrorReturn { error: Throwable -> Resource.failure(error) }
                 .doOnSuccess { resource: Resource<Token> ->
                     resource.isSuccess {
-                        sharedRepository.isLoggedIn = true
-                        sharedRepository.token = it.accessToken
+                        runBlocking { sharedRepository.setUnsplashToken(it.accessToken) }
                     }
                 }
     }

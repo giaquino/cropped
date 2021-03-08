@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Logging in..."
-                android:textAppearance="@style/TextAppearance.Body1"/>
+                android:textAppearance="@style/MyTextAppearance.Body1"/>
         </LinearLayout>
     </FrameLayout>
 </layout>

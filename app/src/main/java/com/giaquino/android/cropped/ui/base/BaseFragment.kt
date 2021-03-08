@@ -11,29 +11,38 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.giaquino.android.cropped.R
 
-abstract class BaseFragment : Fragment() {
+/**
+ * Base fragment without authentication
+ */
+abstract class BaseFragment : Fragment(), FragmentInterface {
 
-    private lateinit var navController: NavController
-
-    val currentSavedStateHandle: SavedStateHandle
-        get() = requireNavController().currentBackStackEntry!!.savedStateHandle
-
-    val previousSavedStateHandle: SavedStateHandle
-        get() = requireNavController().previousBackStackEntry!!.savedStateHandle
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = NavHostFragment.findNavController(this)
-        setupToolbar(view)
+    private val navController by lazy {
+        NavHostFragment.findNavController(this)
     }
 
-    protected fun requireNavController(): NavController {
+    override fun requireNavController(): NavController {
         return navController
     }
 
-    private fun setupToolbar(view: View) {
-        val toolbar: Toolbar = view.findViewById(R.id.toolbar) ?: return
-        val configuration = AppBarConfiguration.Builder(requireNavController().graph).build()
-        NavigationUI.setupWithNavController(toolbar, requireNavController(), configuration)
+    override fun getCurrentSavedStateHandle(): SavedStateHandle {
+        return requireNavController().currentBackStackEntry!!.savedStateHandle
+    }
+
+    override fun getPreviousSavedStateHandle(): SavedStateHandle {
+        return requireNavController().previousBackStackEntry!!.savedStateHandle
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initializeToolbar()
+        initialize()
+    }
+
+    private fun initializeToolbar() {
+        val toolbar: Toolbar = requireView().findViewById(R.id.toolbar) ?: return
+        NavigationUI.setupWithNavController(
+                toolbar,
+                requireNavController(),
+                AppBarConfiguration.Builder(requireNavController().graph).build())
     }
 }

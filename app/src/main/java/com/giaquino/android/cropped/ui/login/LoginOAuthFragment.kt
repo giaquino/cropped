@@ -12,7 +12,6 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import com.giaquino.android.cropped.R
 import com.giaquino.android.cropped.common.Constant
@@ -42,7 +41,7 @@ class LoginOAuthFragment : BaseFragment() {
     }
 
     private fun initializeViewModel() {
-        vm.token.observe(viewLifecycleOwner, Observer { resource: Resource<Token> ->
+        vm.token.observe(viewLifecycleOwner, { resource: Resource<Token> ->
             resource.isLoading { handleLoading(loading = true, showLabel = true) }
             resource.isFailure(this::handleFailure)
             resource.isSuccess(this::handleSuccess)
@@ -50,7 +49,7 @@ class LoginOAuthFragment : BaseFragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun initialize() {
+    override fun initialize() {
         handleLoading(loading = true, showLabel = false)
 
         binding.web.settings.apply {

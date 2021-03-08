@@ -31,21 +31,7 @@ class TopicsFragment : BaseAuthFragment() {
         return binding.root
     }
 
-    override fun onLoginCompleted() {
-        super.onLoginCompleted()
-        initialize()
-        initializeViewModel()
-    }
-
-    private fun initializeViewModel() {
-        vm.topics.observe(viewLifecycleOwner, Observer { resource: Resource<List<Topic>> ->
-            resource.isLoading { handleLoading(true) }
-            resource.isSuccess(this::handleSuccess)
-            resource.isFailure(this::handleFailure)
-        })
-    }
-
-    private fun initialize() {
+    override fun initialize() {
         handleLoading(loading = false)
         adapter = TopicsAdapter { topic: Topic -> requireNavController().navigate(actionTopicsFragmentToPhotosFragment(topic.title)) }
         binding.list.adapter = adapter
@@ -54,6 +40,12 @@ class TopicsFragment : BaseAuthFragment() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 outRect.bottom += binding.list.paddingTop
             }
+        })
+
+        vm.topics.observe(viewLifecycleOwner, Observer { resource: Resource<List<Topic>> ->
+            resource.isLoading { handleLoading(true) }
+            resource.isSuccess(this::handleSuccess)
+            resource.isFailure(this::handleFailure)
         })
         vm.getTopics()
     }

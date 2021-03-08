@@ -1,6 +1,5 @@
 package com.giaquino.android.cropped.ui.login
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
@@ -10,8 +9,11 @@ import com.giaquino.android.cropped.data.common.Resource
 import com.giaquino.android.cropped.data.model.Token
 import com.giaquino.android.cropped.data.repository.SharedRepository
 import com.giaquino.android.cropped.data.repository.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LoginViewModel @ViewModelInject constructor(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
         private val userRepository: UserRepository,
         private val sharedRepository: SharedRepository) : ViewModel() {
 
@@ -19,7 +21,7 @@ class LoginViewModel @ViewModelInject constructor(
     val token: LiveData<Resource<Token>> = _token
 
     fun isLoggedIn() : Boolean {
-        return sharedRepository.isLoggedIn
+        return sharedRepository.getUnsplashToken() != null
     }
 
     fun authorize(code: String) {

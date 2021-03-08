@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Provides
@@ -39,11 +39,14 @@ object NetworkModule {
     @Provides
     fun provideOkHttpClient(sharedRepository: SharedRepository): OkHttpClient {
         val logger = object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) = Timber.d(message)
+            override fun log(message: String) {
+                Timber.d(message)
+            }
         }
         val interceptor = Interceptor {
-            if (sharedRepository.isLoggedIn) {
-                it.proceed(it.request().newBuilder().addHeader("Authorization", "Bearer " + sharedRepository.token).build())
+            val token = sharedRepository.getUnsplashToken()
+            if (token != null) {
+                it.proceed(it.request().newBuilder().addHeader("Authorization", "Bearer $token").build())
             } else {
                 it.proceed(it.request())
             }

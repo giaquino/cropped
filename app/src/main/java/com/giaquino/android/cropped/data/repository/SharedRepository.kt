@@ -2,7 +2,7 @@ package com.giaquino.android.cropped.data.repository
 
 interface SharedRepository {
 
-    var isLoggedIn: Boolean
+    fun getUnsplashToken() : String?
 
-    var token: String?
+    fun setUnsplashToken(token : String)
 }

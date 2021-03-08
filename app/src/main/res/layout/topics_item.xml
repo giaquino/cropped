@@ -37,14 +37,15 @@
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.Headline6"
+                        android:textAppearance="@style/MyTextAppearance.Headline6"
                         tools:text="Nature"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.Subtitle1"
+                        android:textColor="#89000000"
+                        android:textAppearance="@style/MyTextAppearance.Subtitle1"
                         tools:text="By Unsplash"/>
 
                 </LinearLayout>
@@ -68,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
                 android:paddingBottom="16dp"
-                android:textAppearance="@style/TextAppearance.Body1"
+                android:textAppearance="@style/MyTextAppearance.Body1"
                 android:ellipsize="end"
                 android:lines="2"
                 tools:text="Let’s celebrate the magic of Mother Earth — with images of everything our planet has to offer, from stunning seascapes, starry skies, and everything in between."/>
@@ -82,7 +83,7 @@
                 android:drawableStart="@drawable/ic_image"
                 android:drawablePadding="16dp"
                 android:drawableTint="#42000000"
-                android:textAppearance="@style/TextAppearance.Body1"
+                android:textAppearance="@style/MyTextAppearance.Body1"
                 tools:text="6.9k contributions"/>
 
         </LinearLayout>
